@@ -477,6 +477,39 @@ class MainActivity extends jni$_.JObject {
       _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
     );
   }
+
+  static final _id_configureFlutterEngine = _class.instanceMethodId(
+    r'configureFlutterEngine',
+    r'(Lio/flutter/embedding/engine/FlutterEngine;)V',
+  );
+
+  static final _configureFlutterEngine =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void configureFlutterEngine(io.flutter.embedding.engine.FlutterEngine flutterEngine)`
+  void configureFlutterEngine(jni$_.JObject? flutterEngine) {
+    final _$flutterEngine = flutterEngine?.reference ?? jni$_.jNullReference;
+    _configureFlutterEngine(
+      reference.pointer,
+      _id_configureFlutterEngine as jni$_.JMethodIDPtr,
+      _$flutterEngine.pointer,
+    ).check();
+  }
 }
 
 final class $MainActivity$NullableType$ extends jni$_.JType<MainActivity?> {
@@ -569,17 +602,18 @@ class MeasureUtils extends jni$_.JObject {
 
   /// The type which includes information such as the signature of this class.
   static const jni$_.JType<MeasureUtils> type = $MeasureUtils$Type$();
-  static final _id_startRotationStream = _class.staticMethodId(
-    r'startRotationStream',
-    r'()V',
+  static final _id_initialize = _class.staticMethodId(
+    r'initialize',
+    r'(Landroid/content/Context;)V',
   );
 
-  static final _startRotationStream =
+  static final _initialize =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JThrowablePtr Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
               )
             >
           >('globalEnv_CallStaticVoidMethod')
@@ -587,44 +621,110 @@ class MeasureUtils extends jni$_.JObject {
             jni$_.JThrowablePtr Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `static public void startRotationStream()`
-  static void startRotationStream() {
-    _startRotationStream(
+  /// from: `static public void initialize(android.content.Context context)`
+  static void initialize(jni$_.JObject? context) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    _initialize(
       _class.reference.pointer,
-      _id_startRotationStream as jni$_.JMethodIDPtr,
+      _id_initialize as jni$_.JMethodIDPtr,
+      _$context.pointer,
     ).check();
   }
 
-  static final _id_startProximityStream = _class.staticMethodId(
-    r'startProximityStream',
-    r'()V',
+  static final _id_isSensorAvailable = _class.staticMethodId(
+    r'isSensorAvailable',
+    r'(I)Z',
   );
 
-  static final _startProximityStream =
+  static final _isSensorAvailable =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
-              jni$_.JThrowablePtr Function(
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallStaticBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `static public boolean isSensorAvailable(int sensorType)`
+  static bool isSensorAvailable(int sensorType) {
+    return _isSensorAvailable(
+      _class.reference.pointer,
+      _id_isSensorAvailable as jni$_.JMethodIDPtr,
+      sensorType,
+    ).boolean;
+  }
+
+  static final _id_getRotationChannelName = _class.staticMethodId(
+    r'getRotationChannelName',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getRotationChannelName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
               )
             >
-          >('globalEnv_CallStaticVoidMethod')
+          >('globalEnv_CallStaticObjectMethod')
           .asFunction<
-            jni$_.JThrowablePtr Function(
+            jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
             )
           >();
 
-  /// from: `static public void startProximityStream()`
-  static void startProximityStream() {
-    _startProximityStream(
+  /// from: `static public java.lang.String getRotationChannelName()`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? getRotationChannelName() {
+    return _getRotationChannelName(
       _class.reference.pointer,
-      _id_startProximityStream as jni$_.JMethodIDPtr,
-    ).check();
+      _id_getRotationChannelName as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.$JString$NullableType$());
+  }
+
+  static final _id_getProximityChannelName = _class.staticMethodId(
+    r'getProximityChannelName',
+    r'()Ljava/lang/String;',
+  );
+
+  static final _getProximityChannelName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `static public java.lang.String getProximityChannelName()`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? getProximityChannelName() {
+    return _getProximityChannelName(
+      _class.reference.pointer,
+      _id_getProximityChannelName as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.$JString$NullableType$());
   }
 }
 
@@ -694,5 +794,859 @@ final class $MeasureUtils$Type$ extends jni$_.JType<MeasureUtils> {
   bool operator ==(Object other) {
     return other.runtimeType == ($MeasureUtils$Type$) &&
         other is $MeasureUtils$Type$;
+  }
+}
+
+/// from: `com.example.wall_planar.ProximitySensorListener`
+///
+/// Manages the TYPE_PROXIMITY data stream.
+class ProximitySensorListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JType<ProximitySensorListener> $type;
+
+  @jni$_.internal
+  ProximitySensorListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
+
+  static final _class = jni$_.JClass.forName(
+    r'com/example/wall_planar/ProximitySensorListener',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<ProximitySensorListener?> nullableType =
+      $ProximitySensorListener$NullableType$();
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<ProximitySensorListener> type =
+      $ProximitySensorListener$Type$();
+  static final _id_PROXIMITY_CHANNEL = _class.staticFieldId(
+    r'PROXIMITY_CHANNEL',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String PROXIMITY_CHANNEL`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get PROXIMITY_CHANNEL =>
+      _id_PROXIMITY_CHANNEL.get(_class, const jni$_.$JString$NullableType$());
+
+  static final _id_new$ = _class.constructorId(r'(Landroid/content/Context;)V');
+
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void <init>(android.content.Context context)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory ProximitySensorListener(jni$_.JObject? context) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    return ProximitySensorListener.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$context.pointer,
+      ).reference,
+    );
+  }
+
+  static final _id_onListen = _class.instanceMethodId(
+    r'onListen',
+    r'(Ljava/lang/Object;Lio/flutter/plugin/common/EventChannel$EventSink;)V',
+  );
+
+  static final _onListen =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void onListen(java.lang.Object arguments, io.flutter.plugin.common.EventChannel$EventSink events)`
+  void onListen(jni$_.JObject? arguments, jni$_.JObject? events) {
+    final _$arguments = arguments?.reference ?? jni$_.jNullReference;
+    final _$events = events?.reference ?? jni$_.jNullReference;
+    _onListen(
+      reference.pointer,
+      _id_onListen as jni$_.JMethodIDPtr,
+      _$arguments.pointer,
+      _$events.pointer,
+    ).check();
+  }
+
+  static final _id_onCancel = _class.instanceMethodId(
+    r'onCancel',
+    r'(Ljava/lang/Object;)V',
+  );
+
+  static final _onCancel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void onCancel(java.lang.Object arguments)`
+  void onCancel(jni$_.JObject? arguments) {
+    final _$arguments = arguments?.reference ?? jni$_.jNullReference;
+    _onCancel(
+      reference.pointer,
+      _id_onCancel as jni$_.JMethodIDPtr,
+      _$arguments.pointer,
+    ).check();
+  }
+
+  static final _id_onSensorChanged = _class.instanceMethodId(
+    r'onSensorChanged',
+    r'(Landroid/hardware/SensorEvent;)V',
+  );
+
+  static final _onSensorChanged =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void onSensorChanged(android.hardware.SensorEvent event)`
+  void onSensorChanged(jni$_.JObject? event) {
+    final _$event = event?.reference ?? jni$_.jNullReference;
+    _onSensorChanged(
+      reference.pointer,
+      _id_onSensorChanged as jni$_.JMethodIDPtr,
+      _$event.pointer,
+    ).check();
+  }
+
+  static final _id_onAccuracyChanged = _class.instanceMethodId(
+    r'onAccuracyChanged',
+    r'(Landroid/hardware/Sensor;I)V',
+  );
+
+  static final _onAccuracyChanged =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
+
+  /// from: `public void onAccuracyChanged(android.hardware.Sensor sensor, int accuracy)`
+  void onAccuracyChanged(jni$_.JObject? sensor, int accuracy) {
+    final _$sensor = sensor?.reference ?? jni$_.jNullReference;
+    _onAccuracyChanged(
+      reference.pointer,
+      _id_onAccuracyChanged as jni$_.JMethodIDPtr,
+      _$sensor.pointer,
+      accuracy,
+    ).check();
+  }
+}
+
+final class $ProximitySensorListener$NullableType$
+    extends jni$_.JType<ProximitySensorListener?> {
+  @jni$_.internal
+  const $ProximitySensorListener$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lcom/example/wall_planar/ProximitySensorListener;';
+
+  @jni$_.internal
+  @core$_.override
+  ProximitySensorListener? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+      ? null
+      : ProximitySensorListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<ProximitySensorListener?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($ProximitySensorListener$NullableType$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ProximitySensorListener$NullableType$) &&
+        other is $ProximitySensorListener$NullableType$;
+  }
+}
+
+final class $ProximitySensorListener$Type$
+    extends jni$_.JType<ProximitySensorListener> {
+  @jni$_.internal
+  const $ProximitySensorListener$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lcom/example/wall_planar/ProximitySensorListener;';
+
+  @jni$_.internal
+  @core$_.override
+  ProximitySensorListener fromReference(jni$_.JReference reference) =>
+      ProximitySensorListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<ProximitySensorListener?> get nullableType =>
+      const $ProximitySensorListener$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($ProximitySensorListener$Type$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($ProximitySensorListener$Type$) &&
+        other is $ProximitySensorListener$Type$;
+  }
+}
+
+/// from: `com.example.wall_planar.RotationSensorListener`
+///
+/// Manages the TYPE_ROTATION_VECTOR sensor stream.
+class RotationSensorListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JType<RotationSensorListener> $type;
+
+  @jni$_.internal
+  RotationSensorListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
+
+  static final _class = jni$_.JClass.forName(
+    r'com/example/wall_planar/RotationSensorListener',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<RotationSensorListener?> nullableType =
+      $RotationSensorListener$NullableType$();
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<RotationSensorListener> type =
+      $RotationSensorListener$Type$();
+  static final _id_ROTATION_CHANNEL = _class.staticFieldId(
+    r'ROTATION_CHANNEL',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String ROTATION_CHANNEL`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get ROTATION_CHANNEL =>
+      _id_ROTATION_CHANNEL.get(_class, const jni$_.$JString$NullableType$());
+
+  static final _id_new$ = _class.constructorId(r'(Landroid/content/Context;)V');
+
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void <init>(android.content.Context context)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory RotationSensorListener(jni$_.JObject? context) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    return RotationSensorListener.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$context.pointer,
+      ).reference,
+    );
+  }
+
+  static final _id_onListen = _class.instanceMethodId(
+    r'onListen',
+    r'(Ljava/lang/Object;Lio/flutter/plugin/common/EventChannel$EventSink;)V',
+  );
+
+  static final _onListen =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void onListen(java.lang.Object arguments, io.flutter.plugin.common.EventChannel$EventSink events)`
+  void onListen(jni$_.JObject? arguments, jni$_.JObject? events) {
+    final _$arguments = arguments?.reference ?? jni$_.jNullReference;
+    final _$events = events?.reference ?? jni$_.jNullReference;
+    _onListen(
+      reference.pointer,
+      _id_onListen as jni$_.JMethodIDPtr,
+      _$arguments.pointer,
+      _$events.pointer,
+    ).check();
+  }
+
+  static final _id_onCancel = _class.instanceMethodId(
+    r'onCancel',
+    r'(Ljava/lang/Object;)V',
+  );
+
+  static final _onCancel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void onCancel(java.lang.Object arguments)`
+  void onCancel(jni$_.JObject? arguments) {
+    final _$arguments = arguments?.reference ?? jni$_.jNullReference;
+    _onCancel(
+      reference.pointer,
+      _id_onCancel as jni$_.JMethodIDPtr,
+      _$arguments.pointer,
+    ).check();
+  }
+
+  static final _id_onSensorChanged = _class.instanceMethodId(
+    r'onSensorChanged',
+    r'(Landroid/hardware/SensorEvent;)V',
+  );
+
+  static final _onSensorChanged =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void onSensorChanged(android.hardware.SensorEvent event)`
+  void onSensorChanged(jni$_.JObject? event) {
+    final _$event = event?.reference ?? jni$_.jNullReference;
+    _onSensorChanged(
+      reference.pointer,
+      _id_onSensorChanged as jni$_.JMethodIDPtr,
+      _$event.pointer,
+    ).check();
+  }
+
+  static final _id_onAccuracyChanged = _class.instanceMethodId(
+    r'onAccuracyChanged',
+    r'(Landroid/hardware/Sensor;I)V',
+  );
+
+  static final _onAccuracyChanged =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
+
+  /// from: `public void onAccuracyChanged(android.hardware.Sensor sensor, int accuracy)`
+  void onAccuracyChanged(jni$_.JObject? sensor, int accuracy) {
+    final _$sensor = sensor?.reference ?? jni$_.jNullReference;
+    _onAccuracyChanged(
+      reference.pointer,
+      _id_onAccuracyChanged as jni$_.JMethodIDPtr,
+      _$sensor.pointer,
+      accuracy,
+    ).check();
+  }
+}
+
+final class $RotationSensorListener$NullableType$
+    extends jni$_.JType<RotationSensorListener?> {
+  @jni$_.internal
+  const $RotationSensorListener$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lcom/example/wall_planar/RotationSensorListener;';
+
+  @jni$_.internal
+  @core$_.override
+  RotationSensorListener? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : RotationSensorListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<RotationSensorListener?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($RotationSensorListener$NullableType$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($RotationSensorListener$NullableType$) &&
+        other is $RotationSensorListener$NullableType$;
+  }
+}
+
+final class $RotationSensorListener$Type$
+    extends jni$_.JType<RotationSensorListener> {
+  @jni$_.internal
+  const $RotationSensorListener$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lcom/example/wall_planar/RotationSensorListener;';
+
+  @jni$_.internal
+  @core$_.override
+  RotationSensorListener fromReference(jni$_.JReference reference) =>
+      RotationSensorListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<RotationSensorListener?> get nullableType =>
+      const $RotationSensorListener$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($RotationSensorListener$Type$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($RotationSensorListener$Type$) &&
+        other is $RotationSensorListener$Type$;
+  }
+}
+
+/// from: `com.example.wall_planar.SensorStreamManager`
+///
+/// Manages sensor streams.
+class SensorStreamManager extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JType<SensorStreamManager> $type;
+
+  @jni$_.internal
+  SensorStreamManager.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
+
+  static final _class = jni$_.JClass.forName(
+    r'com/example/wall_planar/SensorStreamManager',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<SensorStreamManager?> nullableType =
+      $SensorStreamManager$NullableType$();
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<SensorStreamManager> type =
+      $SensorStreamManager$Type$();
+  static final _id_new$ = _class.constructorId(r'()V');
+
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public void <init>()`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory SensorStreamManager() {
+    return SensorStreamManager.fromReference(
+      _new$(_class.reference.pointer, _id_new$ as jni$_.JMethodIDPtr).reference,
+    );
+  }
+
+  static final _id_initialize = _class.staticMethodId(
+    r'initialize',
+    r'(Landroid/content/Context;)V',
+  );
+
+  static final _initialize =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public void initialize(android.content.Context context)`
+  ///
+  /// Must be called before attempting to access sensor streams.
+  static void initialize(jni$_.JObject? context) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    _initialize(
+      _class.reference.pointer,
+      _id_initialize as jni$_.JMethodIDPtr,
+      _$context.pointer,
+    ).check();
+  }
+
+  static final _id_getSensorStatus = _class.staticMethodId(
+    r'getSensorStatus',
+    r'(I)Z',
+  );
+
+  static final _getSensorStatus =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Int32,)>,
+              )
+            >
+          >('globalEnv_CallStaticBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  /// from: `static public boolean getSensorStatus(int sensorType)`
+  ///
+  /// Checks if a specific sensor type is available on the device.
+  static bool getSensorStatus(int sensorType) {
+    return _getSensorStatus(
+      _class.reference.pointer,
+      _id_getSensorStatus as jni$_.JMethodIDPtr,
+      sensorType,
+    ).boolean;
+  }
+
+  static final _id_registerRotationListener = _class.staticMethodId(
+    r'registerRotationListener',
+    r'(Landroid/hardware/SensorEventListener;)Z',
+  );
+
+  static final _registerRotationListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public boolean registerRotationListener(android.hardware.SensorEventListener listener)`
+  ///
+  /// Registers the provided listener for the TYPE_ROTATION_VECTOR sensor.
+  static bool registerRotationListener(jni$_.JObject? listener) {
+    final _$listener = listener?.reference ?? jni$_.jNullReference;
+    return _registerRotationListener(
+      _class.reference.pointer,
+      _id_registerRotationListener as jni$_.JMethodIDPtr,
+      _$listener.pointer,
+    ).boolean;
+  }
+
+  static final _id_registerProximityListener = _class.staticMethodId(
+    r'registerProximityListener',
+    r'(Landroid/hardware/SensorEventListener;)Z',
+  );
+
+  static final _registerProximityListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public boolean registerProximityListener(android.hardware.SensorEventListener listener)`
+  ///
+  /// Registers the provided listener for the TYPE_PROXIMITY sensor.
+  static bool registerProximityListener(jni$_.JObject? listener) {
+    final _$listener = listener?.reference ?? jni$_.jNullReference;
+    return _registerProximityListener(
+      _class.reference.pointer,
+      _id_registerProximityListener as jni$_.JMethodIDPtr,
+      _$listener.pointer,
+    ).boolean;
+  }
+
+  static final _id_unregisterSensorEventListener = _class.staticMethodId(
+    r'unregisterSensorEventListener',
+    r'(Landroid/hardware/SensorEventListener;)V',
+  );
+
+  static final _unregisterSensorEventListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public void unregisterSensorEventListener(android.hardware.SensorEventListener listener)`
+  ///
+  /// Unregisters the provided SensorEventListener.
+  static void unregisterSensorEventListener(jni$_.JObject? listener) {
+    final _$listener = listener?.reference ?? jni$_.jNullReference;
+    _unregisterSensorEventListener(
+      _class.reference.pointer,
+      _id_unregisterSensorEventListener as jni$_.JMethodIDPtr,
+      _$listener.pointer,
+    ).check();
+  }
+}
+
+final class $SensorStreamManager$NullableType$
+    extends jni$_.JType<SensorStreamManager?> {
+  @jni$_.internal
+  const $SensorStreamManager$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lcom/example/wall_planar/SensorStreamManager;';
+
+  @jni$_.internal
+  @core$_.override
+  SensorStreamManager? fromReference(jni$_.JReference reference) =>
+      reference.isNull ? null : SensorStreamManager.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<SensorStreamManager?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($SensorStreamManager$NullableType$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($SensorStreamManager$NullableType$) &&
+        other is $SensorStreamManager$NullableType$;
+  }
+}
+
+final class $SensorStreamManager$Type$
+    extends jni$_.JType<SensorStreamManager> {
+  @jni$_.internal
+  const $SensorStreamManager$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature => r'Lcom/example/wall_planar/SensorStreamManager;';
+
+  @jni$_.internal
+  @core$_.override
+  SensorStreamManager fromReference(jni$_.JReference reference) =>
+      SensorStreamManager.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<SensorStreamManager?> get nullableType =>
+      const $SensorStreamManager$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($SensorStreamManager$Type$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($SensorStreamManager$Type$) &&
+        other is $SensorStreamManager$Type$;
   }
 }
