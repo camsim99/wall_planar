@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wall_planar/rotation_sensor_service.dart';
 
-import 'angle_display.dart';
-import 'rotation_sensor_service.dart';
+import 'level_visualizer.dart';
 
 class LevelView extends StatelessWidget {
   final RotationSensorService rotationSensorService = RotationSensorService();
@@ -24,15 +24,16 @@ class LevelView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text(
-                'Rotation Vector Angles (Degrees)',
+                'Picture Level Assistant',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.blueGrey,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 20),
+
               // StreamBuilder listens to the processed angle data
               StreamBuilder<Map<String, double>>(
                 stream: rotationSensorService.eulerAngleStream,
@@ -51,14 +52,21 @@ class LevelView extends StatelessWidget {
                   final angles =
                       snapshot.data ?? {'pitch': 0.0, 'roll': 0.0, 'yaw': 0.0};
 
-                  return AngleDisplay(angles: angles);
+                  // Only use Roll for the horizontal level visualization
+                  return LevelVisualizer(
+                    rollAngle: angles['roll']!,
+                    pitchAngle:
+                        angles['pitch']!, // Still pass Pitch for secondary info
+                    yawAngle:
+                        angles['yaw']!, // Still pass Yaw for secondary info
+                  );
                 },
               ),
               const SizedBox(height: 40),
               const Text(
-                'Hold phone flat on surface (Roll/Pitch should approach 0°)',
+                'Place phone standing up on the top edge of the picture frame.',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white70),
+                style: TextStyle(color: Colors.white70, fontSize: 16),
               ),
             ],
           ),
