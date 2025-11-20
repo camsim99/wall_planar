@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wall_planar/rotation_sensor_service.dart';
 import 'package:wall_planar/angle_display.dart';
 
 import 'level_visualizer.dart';
+import 'main.dart' show sensorService;
 
 class LevelView extends StatefulWidget {
   const LevelView({super.key});
@@ -15,7 +15,6 @@ class LevelView extends StatefulWidget {
 }
 
 class _LevelViewState extends State<LevelView> {
-  final _rotationSensorService = RotationSensorService();
   final _angleStreamController =
       StreamController<Map<String, double>>.broadcast();
   late final StreamSubscription _sensorSubscription;
@@ -26,9 +25,7 @@ class _LevelViewState extends State<LevelView> {
     super.initState();
     // Create one persistent subscription that lives as long as this widget.
     // This prevents the native stream from being cancelled when the bottom sheet closes.
-    _sensorSubscription = _rotationSensorService.eulerAngleStream.listen((
-      angles,
-    ) {
+    _sensorSubscription = sensorService.eulerAngleStream.listen((angles) {
       _angleStreamController.add(angles);
     });
   }

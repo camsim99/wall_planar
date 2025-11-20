@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'level_view.dart';
+import 'measure_view.dart';
+import 'sensor_service.dart';
+
+// Global SensorService.
+final sensorService = SensorService();
 
 void main() {
   runApp(const WallPlanarApp());
@@ -19,7 +24,7 @@ class WallPlanarApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         // fontFamily: 'Inter',
       ),
-      home: LevelView(),
+      home: MeasureView(), //LevelView(),
     );
   }
 }
