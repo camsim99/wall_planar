@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wall_planar/home_screen.dart';
 import 'package:wall_planar/measure_debug_display.dart';
 
 import 'main.dart' show sensorService;
 import 'dart:async';
 
 class MeasureView extends StatefulWidget {
-  const MeasureView({super.key});
+  final VoidCallback onGoHome;
+
+  const MeasureView({super.key, required this.onGoHome});
 
   @override
   State<MeasureView> createState() => _MeasureViewState();
@@ -92,6 +95,20 @@ class _MeasureViewState extends State<MeasureView> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                // --- Back Button ---
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.black,
+                      ),
+                      onPressed: widget.onGoHome,
+                    ),
+                  ),
+                ),
                 Expanded(
                   child: Center(
                     child: SingleChildScrollView(
