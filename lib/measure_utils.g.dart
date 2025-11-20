@@ -431,6 +431,291 @@ final class $R$Type$ extends jni$_.JType<R> {
   }
 }
 
+/// from: `com.example.wall_planar.AccelerometerUnitsListener`
+///
+/// Manages the TYPE_ACCELEROMETER data stream, used for the slide measure mode.
+class AccelerometerUnitsListener extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JType<AccelerometerUnitsListener> $type;
+
+  @jni$_.internal
+  AccelerometerUnitsListener.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
+
+  static final _class = jni$_.JClass.forName(
+    r'com/example/wall_planar/AccelerometerUnitsListener',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<AccelerometerUnitsListener?> nullableType =
+      $AccelerometerUnitsListener$NullableType$();
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<AccelerometerUnitsListener> type =
+      $AccelerometerUnitsListener$Type$();
+  static final _id_ACCELEROMETER_UNITS_CHANNEL = _class.staticFieldId(
+    r'ACCELEROMETER_UNITS_CHANNEL',
+    r'Ljava/lang/String;',
+  );
+
+  /// from: `static public final java.lang.String ACCELEROMETER_UNITS_CHANNEL`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? get ACCELEROMETER_UNITS_CHANNEL =>
+      _id_ACCELEROMETER_UNITS_CHANNEL.get(
+        _class,
+        const jni$_.$JString$NullableType$(),
+      );
+
+  static final _id_new$ = _class.constructorId(r'(Landroid/content/Context;)V');
+
+  static final _new$ =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_NewObject')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void <init>(android.content.Context context)`
+  /// The returned object must be released after use, by calling the [release] method.
+  factory AccelerometerUnitsListener(jni$_.JObject? context) {
+    final _$context = context?.reference ?? jni$_.jNullReference;
+    return AccelerometerUnitsListener.fromReference(
+      _new$(
+        _class.reference.pointer,
+        _id_new$ as jni$_.JMethodIDPtr,
+        _$context.pointer,
+      ).reference,
+    );
+  }
+
+  static final _id_onListen = _class.instanceMethodId(
+    r'onListen',
+    r'(Ljava/lang/Object;Lio/flutter/plugin/common/EventChannel$EventSink;)V',
+  );
+
+  static final _onListen =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void onListen(java.lang.Object arguments, io.flutter.plugin.common.EventChannel$EventSink events)`
+  void onListen(jni$_.JObject? arguments, jni$_.JObject? events) {
+    final _$arguments = arguments?.reference ?? jni$_.jNullReference;
+    final _$events = events?.reference ?? jni$_.jNullReference;
+    _onListen(
+      reference.pointer,
+      _id_onListen as jni$_.JMethodIDPtr,
+      _$arguments.pointer,
+      _$events.pointer,
+    ).check();
+  }
+
+  static final _id_onCancel = _class.instanceMethodId(
+    r'onCancel',
+    r'(Ljava/lang/Object;)V',
+  );
+
+  static final _onCancel =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void onCancel(java.lang.Object arguments)`
+  void onCancel(jni$_.JObject? arguments) {
+    final _$arguments = arguments?.reference ?? jni$_.jNullReference;
+    _onCancel(
+      reference.pointer,
+      _id_onCancel as jni$_.JMethodIDPtr,
+      _$arguments.pointer,
+    ).check();
+  }
+
+  static final _id_onSensorChanged = _class.instanceMethodId(
+    r'onSensorChanged',
+    r'(Landroid/hardware/SensorEvent;)V',
+  );
+
+  static final _onSensorChanged =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public void onSensorChanged(android.hardware.SensorEvent event)`
+  void onSensorChanged(jni$_.JObject? event) {
+    final _$event = event?.reference ?? jni$_.jNullReference;
+    _onSensorChanged(
+      reference.pointer,
+      _id_onSensorChanged as jni$_.JMethodIDPtr,
+      _$event.pointer,
+    ).check();
+  }
+
+  static final _id_onAccuracyChanged = _class.instanceMethodId(
+    r'onAccuracyChanged',
+    r'(Landroid/hardware/Sensor;I)V',
+  );
+
+  static final _onAccuracyChanged =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JThrowablePtr Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>, jni$_.Int32)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$_.JThrowablePtr Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              int,
+            )
+          >();
+
+  /// from: `public void onAccuracyChanged(android.hardware.Sensor sensor, int accuracy)`
+  void onAccuracyChanged(jni$_.JObject? sensor, int accuracy) {
+    final _$sensor = sensor?.reference ?? jni$_.jNullReference;
+    _onAccuracyChanged(
+      reference.pointer,
+      _id_onAccuracyChanged as jni$_.JMethodIDPtr,
+      _$sensor.pointer,
+      accuracy,
+    ).check();
+  }
+}
+
+final class $AccelerometerUnitsListener$NullableType$
+    extends jni$_.JType<AccelerometerUnitsListener?> {
+  @jni$_.internal
+  const $AccelerometerUnitsListener$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lcom/example/wall_planar/AccelerometerUnitsListener;';
+
+  @jni$_.internal
+  @core$_.override
+  AccelerometerUnitsListener? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+      ? null
+      : AccelerometerUnitsListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<AccelerometerUnitsListener?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($AccelerometerUnitsListener$NullableType$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($AccelerometerUnitsListener$NullableType$) &&
+        other is $AccelerometerUnitsListener$NullableType$;
+  }
+}
+
+final class $AccelerometerUnitsListener$Type$
+    extends jni$_.JType<AccelerometerUnitsListener> {
+  @jni$_.internal
+  const $AccelerometerUnitsListener$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lcom/example/wall_planar/AccelerometerUnitsListener;';
+
+  @jni$_.internal
+  @core$_.override
+  AccelerometerUnitsListener fromReference(jni$_.JReference reference) =>
+      AccelerometerUnitsListener.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<AccelerometerUnitsListener?> get nullableType =>
+      const $AccelerometerUnitsListener$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($AccelerometerUnitsListener$Type$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($AccelerometerUnitsListener$Type$) &&
+        other is $AccelerometerUnitsListener$Type$;
+  }
+}
+
 /// from: `com.example.wall_planar.MainActivity`
 class MainActivity extends jni$_.JObject {
   @jni$_.internal
@@ -724,6 +1009,37 @@ class MeasureUtils extends jni$_.JObject {
     return _getProximityChannelName(
       _class.reference.pointer,
       _id_getProximityChannelName as jni$_.JMethodIDPtr,
+    ).object<jni$_.JString?>(const jni$_.$JString$NullableType$());
+  }
+
+  static final _id_getAccelerometerUnitsStreamChannelName = _class
+      .staticMethodId(
+        r'getAccelerometerUnitsStreamChannelName',
+        r'()Ljava/lang/String;',
+      );
+
+  static final _getAccelerometerUnitsStreamChannelName =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `static public java.lang.String getAccelerometerUnitsStreamChannelName()`
+  /// The returned object must be released after use, by calling the [release] method.
+  static jni$_.JString? getAccelerometerUnitsStreamChannelName() {
+    return _getAccelerometerUnitsStreamChannelName(
+      _class.reference.pointer,
+      _id_getAccelerometerUnitsStreamChannelName as jni$_.JMethodIDPtr,
     ).object<jni$_.JString?>(const jni$_.$JString$NullableType$());
   }
 }
@@ -1540,6 +1856,41 @@ class SensorStreamManager extends jni$_.JObject {
     return _registerProximityListener(
       _class.reference.pointer,
       _id_registerProximityListener as jni$_.JMethodIDPtr,
+      _$listener.pointer,
+    ).boolean;
+  }
+
+  static final _id_registerAccelerometerListener = _class.staticMethodId(
+    r'registerAccelerometerListener',
+    r'(Landroid/hardware/SensorEventListener;)Z',
+  );
+
+  static final _registerAccelerometerListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallStaticBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `static public boolean registerAccelerometerListener(android.hardware.SensorEventListener listener)`
+  ///
+  /// Registers the provided listener for the Accelerometer sensor.
+  static bool registerAccelerometerListener(jni$_.JObject? listener) {
+    final _$listener = listener?.reference ?? jni$_.jNullReference;
+    return _registerAccelerometerListener(
+      _class.reference.pointer,
+      _id_registerAccelerometerListener as jni$_.JMethodIDPtr,
       _$listener.pointer,
     ).boolean;
   }

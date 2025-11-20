@@ -20,5 +20,9 @@ public class MainActivity extends FlutterActivity {
             flutterEngine.getDartExecutor().getBinaryMessenger(), 
             ProximitySensorListener.PROXIMITY_CHANNEL
         ).setStreamHandler(new ProximitySensorListener(getApplicationContext()));
+        new EventChannel(
+            flutterEngine.getDartExecutor().getBinaryMessenger(), 
+            AccelerometerUnitsListener.ACCELEROMETER_UNITS_CHANNEL
+        ).setStreamHandler(new AccelerometerUnitsListener(getApplicationContext()));
     }
 }

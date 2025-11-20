@@ -67,6 +67,24 @@ public class SensorStreamManager {
         return sensorManager.registerListener(listener, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    /** Registers the provided listener for the Accelerometer sensor. */
+    public static boolean registerAccelerometerListener(SensorEventListener listener) {
+        if (sensorManager == null){
+            Log.e(TAG, "SensorManager not initialized. Cannot register accelerometer listener.");
+            return false;
+        }
+
+        Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if (accelerometerSensor == null) {
+            Log.e(TAG, "Accelerometer Sensor not found on this device.");
+            return false;
+        }
+        
+        // Register the listener with a high speed suitable for motion calculation (integration)
+        return sensorManager.registerListener(listener, accelerometerSensor, SensorManager.SENSOR_DELAY_GAME);
+    }
+
+
     /** Unregisters the provided SensorEventListener. */
     public static void unregisterSensorEventListener(SensorEventListener listener) {
         if (sensorManager != null) {

@@ -22,4 +22,8 @@ public abstract class MeasureUtils {
     public static String getProximityChannelName() {
         return ProximitySensorListener.PROXIMITY_CHANNEL;
     }
+
+    public static String getAccelerometerUnitsStreamChannelName() {
+        return AccelerometerUnitsListener.ACCELEROMETER_UNITS_CHANNEL;
+    }
 }
