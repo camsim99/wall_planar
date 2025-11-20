@@ -3,24 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 // --- Placeholder/Target Views ---
 
-class ThirdWidget extends StatelessWidget {
-  const ThirdWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Placeholder: Third Utility View',
-        style: TextStyle(fontSize: 24, color: Colors.purpleAccent),
-      ),
-    );
-  }
-}
-
 // --- Home Screen Implementation ---
 
 // Define constants for navigation indices (must match main app's routing logic)
-enum WallPlanarView { level, measure, third }
+enum WallPlanarView { level, measure, layout }
 
 class HomeScreen extends StatelessWidget {
   // Callback function to inform the main app (WallPlanarApp) to change its view index.
@@ -64,21 +50,21 @@ class HomeScreen extends StatelessWidget {
               Column(
                 children: [
                   _NavigationButton(
-                    label: 'LEVEL VIEW',
+                    label: 'LEVEL TOOL',
                     icon: Icons.auto_fix_high,
                     color: Colors.redAccent, // Red button style
                     onPressed: () => onNavigate(0), // Level View is index 0
                   ),
                   const SizedBox(height: 16),
                   _NavigationButton(
-                    label: 'MEASURE VIEW',
+                    label: 'MEASURE TOOL',
                     icon: Icons.straighten,
                     color: Colors.green, // Green button style
                     onPressed: () => onNavigate(1), // Measure View is index 1
                   ),
                   const SizedBox(height: 16),
                   _NavigationButton(
-                    label: 'THIRD VIEW',
+                    label: 'LAYOUT TOOL',
                     icon: Icons.extension,
                     color: Colors.blueGrey.shade600,
                     onPressed: () => onNavigate(2), // Third Widget is index 2

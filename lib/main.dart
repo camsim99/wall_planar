@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
+import 'layout_planner.dart';
 import 'level_view.dart';
 import 'measure_view.dart';
 import 'sensor_service.dart';
@@ -52,7 +53,7 @@ class _WallPlanarAppState extends State<WallPlanarApp> {
     _utilityViews = <Widget>[
       LevelView(onGoHome: _goHome),
       MeasureView(onGoHome: _goHome),
-      const ThirdWidget(),
+      LayoutPlannerView(onGoHome: _goHome),
     ];
   }
 
