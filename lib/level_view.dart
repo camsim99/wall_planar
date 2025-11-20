@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wall_planar/rotation_sensor_service.dart';
 import 'package:wall_planar/angle_display.dart';
 
@@ -48,10 +49,10 @@ class LevelView extends StatelessWidget {
                           pitchAngle: angles['pitch']!,
                           yawAngle: angles['yaw']!,
                         ),
-                        const Text(
+                        Text(
                           'Place phone standing up on the top edge of the picture frame.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white70, fontSize: 16),
+                          style: GoogleFonts.getFont('VT323', fontSize: 20),
                         ),
                       ],
                     ),

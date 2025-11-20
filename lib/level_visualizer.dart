@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LevelVisualizer extends StatelessWidget {
   final double rollAngle;
@@ -40,12 +41,7 @@ class LevelVisualizer extends StatelessWidget {
 
     final correctionText = isLevel
         ? 'PERFECTLY LEVEL'
-        : 'ADJUST $direction: ${correctionAngle.toStringAsFixed(1)}°';
-
-    final correctionColor = isLevel
-        ? Colors.lightGreenAccent
-        : Colors.redAccent;
-
+        : 'ADJUST $direction ${correctionAngle.toStringAsFixed(1)}°';
     return Column(
       children: [
         // --- Correction Text Display ---
@@ -53,10 +49,10 @@ class LevelVisualizer extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 24.0),
           child: Text(
             correctionText,
-            style: TextStyle(
-              fontSize: isLevel ? 28 : 24,
-              fontWeight: FontWeight.bold,
-              color: correctionColor,
+            style: GoogleFonts.getFont(
+              'Press Start 2P',
+              fontSize: 20,
+              color: isLevel ? Colors.lightGreenAccent : Colors.red,
             ),
           ),
         ),
