@@ -55,28 +55,30 @@ public class AccelerometerUnitsListener implements EventChannel.StreamHandler, S
     
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (accelerationSink != null && event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+        if (accelerationSink != null) {
             
             // Perform accumulation only if we have a previous timestamp
             if (lastTimeNs != 0) {
                 // Time difference in seconds
                 final float dT = (event.timestamp - lastTimeNs) * NS2S;
-                                
+                
+                // --- Integration/Accumulation Logic ---
+                
                 // 1. Get the primary measurement axis (X-axis for side-to-side sliding)
                 float accelerationX = event.values[0]; 
                 
-                // 2. Filter out small noise (This ignores acceleration below the threshold)
+                // 2. Filter out small noise
                 if (Math.abs(accelerationX) > SENSITIVITY_THRESHOLD) {
                     
-                    // 3. Simple accumulation: This is a hacky integration (velocity * time)
-                    // In a real app, this would involve complex filtering and double integration (distance = 0.5 * a * t^2)
-                    // We simplify to sum of (acceleration * time interval) to represent motion units.
+                    // *** FIX A: Accumulate the ABSOLUTE VALUE of acceleration * dT ***
+                    // This prevents negative drift and ensures we measure total motion.
                     totalAccumulatedDistance += Math.abs(accelerationX * dT); 
                     
                     // We must update the timestamp *after* use
                     lastTimeNs = event.timestamp;
                 } else {
-                    // Do not update timestamp if motion is below threshold, to capture larger time gaps between actual slides.
+                    // Only update timestamp if motion is significant, to avoid skipping large gaps.
+                    lastTimeNs = event.timestamp;
                 }
 
                 // Push the running accumulated total to Dart (Wall Units)
@@ -87,6 +89,7 @@ public class AccelerometerUnitsListener implements EventChannel.StreamHandler, S
                 lastTimeNs = event.timestamp;
             }
         }
+        
     }
 
     @Override

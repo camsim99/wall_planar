@@ -67,14 +67,14 @@ public class SensorStreamManager {
         return sensorManager.registerListener(listener, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
-    /** Registers the provided listener for the Accelerometer sensor. */
+    /** Registers the provided listener for the TYPE_LINEAR_ACCELERATION sensor. */
     public static boolean registerAccelerometerListener(SensorEventListener listener) {
         if (sensorManager == null){
             Log.e(TAG, "SensorManager not initialized. Cannot register accelerometer listener.");
             return false;
         }
 
-        Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         if (accelerometerSensor == null) {
             Log.e(TAG, "Accelerometer Sensor not found on this device.");
             return false;
