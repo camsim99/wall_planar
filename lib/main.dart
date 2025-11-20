@@ -15,9 +15,9 @@ class WallPlanarApp extends StatelessWidget {
       title: 'WallPlanar Level View',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        brightness: Brightness.dark, // Dark mode aesthetic
+        // brightness: Brightness.light, // Dark mode aesthetic
         primarySwatch: Colors.blue,
-        fontFamily: 'Inter',
+        // fontFamily: 'Inter',
       ),
       home: LevelView(),
     );

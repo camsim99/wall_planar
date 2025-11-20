@@ -64,6 +64,7 @@ flutter:
   assets:
       - assets/level.png
       - assets/level_perfect.png
+      - assets/show_more_details.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

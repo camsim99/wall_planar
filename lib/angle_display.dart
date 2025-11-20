@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-class AngleDisplay extends StatelessWidget {
-  final Map<String, double> angles;
+class AngleDisplay extends StatefulWidget {
+  final Stream<Map<String, double>> angleStream;
 
-  const AngleDisplay({required this.angles, super.key});
+  const AngleDisplay({required this.angleStream, super.key});
 
+  @override
+  State<AngleDisplay> createState() => _AngleDisplayState();
+}
+
+class _AngleDisplayState extends State<AngleDisplay> {
   Widget _buildAngleCard({
     required String title,
     required double value,
@@ -55,27 +60,38 @@ class AngleDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Roll (X-axis) - Side to side tilt
-        _buildAngleCard(
-          title: 'Roll (X-Axis)',
-          value: angles['roll']!,
-          color: Colors.orange,
-        ),
-        // Pitch (Y-axis) - Forward/backward tilt
-        _buildAngleCard(
-          title: 'Pitch (Y-Axis)',
-          value: angles['pitch']!,
-          color: Colors.cyanAccent,
-        ),
-        // Yaw (Z-axis) - Compass heading (less critical for leveling)
-        _buildAngleCard(
-          title: 'Yaw (Z-Axis)',
-          value: angles['yaw']!,
-          color: Colors.purpleAccent,
-        ),
-      ],
+    return StreamBuilder<Map<String, double>>(
+      stream: widget.angleStream,
+      builder: (context, snapshot) {
+        final angles = snapshot.data ?? {'roll': 0.0, 'pitch': 0.0, 'yaw': 0.0};
+
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Roll (X-axis) - Side to side tilt
+            _buildAngleCard(
+              title: 'Roll (X-Axis)',
+              value: angles['roll']!,
+              color: Colors.orange,
+            ),
+            const SizedBox(height: 8),
+            // Pitch (Y-axis) - Forward/backward tilt
+            _buildAngleCard(
+              title: 'Pitch (Y-Axis)',
+              value: angles['pitch']!,
+              color: Colors.cyanAccent,
+            ),
+            const SizedBox(height: 8),
+            // Yaw (Z-axis) - Compass heading (less critical for leveling)
+            _buildAngleCard(
+              title: 'Yaw (Z-Axis)',
+              value: angles['yaw']!,
+              color: Colors.purpleAccent,
+            ),
+            const SizedBox(height: 16), // Add some padding at the bottom
+          ],
+        );
+      },
     );
   }
 }

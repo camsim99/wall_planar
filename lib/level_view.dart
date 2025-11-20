@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wall_planar/rotation_sensor_service.dart';
@@ -5,16 +7,36 @@ import 'package:wall_planar/angle_display.dart';
 
 import 'level_visualizer.dart';
 
-class LevelView extends StatelessWidget {
-  final RotationSensorService rotationSensorService = RotationSensorService();
+class LevelView extends StatefulWidget {
+  const LevelView({super.key});
 
-  LevelView({super.key});
+  @override
+  State<LevelView> createState() => _LevelViewState();
+}
+
+class _LevelViewState extends State<LevelView> {
+  final _rotationSensorService = RotationSensorService();
+  final _angleStreamController =
+      StreamController<Map<String, double>>.broadcast();
+  late final StreamSubscription _sensorSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    // Create one persistent subscription that lives as long as this widget.
+    // This prevents the native stream from being cancelled when the bottom sheet closes.
+    _sensorSubscription = _rotationSensorService.eulerAngleStream.listen((
+      angles,
+    ) {
+      _angleStreamController.add(angles);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<Map<String, double>>(
-        stream: rotationSensorService.eulerAngleStream,
+        stream: _angleStreamController.stream,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -60,22 +82,24 @@ class LevelView extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
-                  child: TextButton(
-                    onPressed: () {
+                  child: GestureDetector(
+                    onTap: () {
                       showModalBottomSheet(
                         context: context,
                         backgroundColor: Colors.blueGrey.shade900,
                         builder: (BuildContext context) {
                           return Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: AngleDisplay(angles: angles),
+                            padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+                            child: AngleDisplay(
+                              angleStream: _angleStreamController.stream,
+                            ),
                           );
                         },
                       );
                     },
-                    child: const Text(
-                      'Show More Details',
-                      style: TextStyle(color: Colors.white70),
+                    child: Image.asset(
+                      'assets/show_more_details.png',
+                      width: 140, // Adjust size as needed
                     ),
                   ),
                 ),
@@ -85,5 +109,12 @@ class LevelView extends StatelessWidget {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _sensorSubscription.cancel();
+    _angleStreamController.close();
+    super.dispose();
   }
 }
