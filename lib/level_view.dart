@@ -61,21 +61,6 @@ class _LevelViewState extends State<LevelView> {
           child: Column(
             // This main column structures the whole screen
             children: [
-              // --- Back Button ---
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 24.0),
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Colors.black,
-                    ),
-                    onPressed: widget.onGoHome,
-                  ),
-                ),
-              ),
-
               Expanded(
                 // Takes up all space above the button
                 child: Center(
@@ -97,60 +82,76 @@ class _LevelViewState extends State<LevelView> {
                   ),
                 ),
               ),
+              // Center(
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
-                child: Visibility(
-                  visible: !_isBottomSheetOpen,
-                  // These properties ensure the button's space is maintained
-                  // even when it's invisible, preventing any layout shift.
-                  maintainState: true,
-                  maintainAnimation: true,
-                  maintainSize: true,
-                  child: GestureDetector(
-                    onTap: () async {
-                      setState(() {
-                        _isBottomSheetOpen = true;
-                      });
-
-                      await showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Colors.transparent,
-                        // Control the dimming of the background behind the sheet.
-                        barrierColor: Colors.transparent,
-                        builder: (BuildContext context) {
-                          // This Column with MainAxisSize.min is the key to making
-                          // the bottom sheet only as tall as its content.
-                          return Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                  8,
-                                  16,
-                                  8,
-                                  16,
-                                ),
-                                child: AngleDisplay(
-                                  angleStream: _angleStreamController.stream,
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-
-                      // This code runs after the sheet is dismissed
-                      setState(() {
-                        _isBottomSheetOpen = false;
-                      });
-                    },
-                    child: Image.asset(
-                      'assets/show_more_details.png',
-                      width: 140, // Adjust size as needed
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // --- Back Button ---
+                    GestureDetector(
+                      onTap: widget.onGoHome,
+                      child: Image.asset('assets/back.png', width: 60),
                     ),
-                  ),
+
+                    SizedBox(width: 25),
+
+                    Visibility(
+                      visible: !_isBottomSheetOpen,
+                      // These properties ensure the button's space is maintained
+                      // even when it's invisible, preventing any layout shift.
+                      maintainState: true,
+                      maintainAnimation: true,
+                      maintainSize: true,
+                      child: GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            _isBottomSheetOpen = true;
+                          });
+
+                          await showModalBottomSheet(
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            // Control the dimming of the background behind the sheet.
+                            barrierColor: Colors.transparent,
+                            builder: (BuildContext context) {
+                              // This Column with MainAxisSize.min is the key to making
+                              // the bottom sheet only as tall as its content.
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                      8,
+                                      16,
+                                      8,
+                                      16,
+                                    ),
+                                    child: AngleDisplay(
+                                      angleStream:
+                                          _angleStreamController.stream,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+
+                          // This code runs after the sheet is dismissed
+                          setState(() {
+                            _isBottomSheetOpen = false;
+                          });
+                        },
+                        child: Image.asset(
+                          'assets/show_more_details.png',
+                          width: 140, // Adjust size as needed
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
+              // ),
             ],
           ),
         );

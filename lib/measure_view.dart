@@ -96,19 +96,6 @@ class _MeasureViewState extends State<MeasureView> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // --- Back Button ---
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 24.0),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Colors.black,
-                      ),
-                      onPressed: widget.onGoHome,
-                    ),
-                  ),
-                ),
                 Expanded(
                   child: Center(
                     child: SingleChildScrollView(
@@ -229,43 +216,56 @@ class _MeasureViewState extends State<MeasureView> {
                   ),
                 ),
                 // --- Show More Details Button ---
-                Center(
-                  child: Visibility(
-                    visible: !_isBottomSheetOpen,
-                    maintainState: true,
-                    maintainAnimation: true,
-                    maintainSize: true,
-                    child: GestureDetector(
-                      onTap: () async {
-                        setState(() => _isBottomSheetOpen = true);
+                // Center(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // --- Back Button ---
+                    GestureDetector(
+                      onTap: widget.onGoHome,
+                      child: Image.asset('assets/back.png', width: 60),
+                    ),
 
-                        await showModalBottomSheet(
-                          context: context,
-                          backgroundColor: Colors.transparent,
-                          barrierColor: Colors.black.withOpacity(0.2),
-                          builder: (BuildContext context) {
-                            return Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                MeasureDebugDisplay(
-                                  distanceStream: _distanceStreamController
-                                      .stream, // Use the broadcast stream
-                                  isMeasuring: _isMeasuring,
-                                  initialDistance: _initialDistanceAccumulation,
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                    SizedBox(width: 25),
 
-                        setState(() => _isBottomSheetOpen = false);
-                      },
-                      child: Image.asset(
-                        'assets/show_more_details.png',
-                        width: 150, // Corrected width for the button
+                    Visibility(
+                      visible: !_isBottomSheetOpen,
+                      maintainState: true,
+                      maintainAnimation: true,
+                      maintainSize: true,
+                      child: GestureDetector(
+                        onTap: () async {
+                          setState(() => _isBottomSheetOpen = true);
+
+                          await showModalBottomSheet(
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            barrierColor: Colors.black.withOpacity(0.2),
+                            builder: (BuildContext context) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  MeasureDebugDisplay(
+                                    distanceStream: _distanceStreamController
+                                        .stream, // Use the broadcast stream
+                                    isMeasuring: _isMeasuring,
+                                    initialDistance:
+                                        _initialDistanceAccumulation,
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+
+                          setState(() => _isBottomSheetOpen = false);
+                        },
+                        child: Image.asset(
+                          'assets/show_more_details.png',
+                          width: 150, // Corrected width for the button
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             );

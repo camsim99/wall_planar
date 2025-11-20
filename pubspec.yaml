@@ -68,6 +68,7 @@ flutter:
       - assets/start.png
       - assets/stop.png
       - assets/wall_planar.png
+      - assets/back.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
