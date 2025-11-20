@@ -56,103 +56,106 @@ class _LevelViewState extends State<LevelView> {
         // Use default or latest data
         final angles = snapshot.data ?? {'pitch': 0.0, 'roll': 0.0, 'yaw': 0.0};
 
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            // This main column structures the whole screen
-            children: [
-              Expanded(
-                // Takes up all space above the button
-                child: Center(
-                  // Centers its child in the expanded space
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min, // Don't expand vertically
+        return Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              // This main column structures the whole screen
+              children: [
+                Expanded(
+                  // Takes up all space above the button
+                  child: Center(
+                    // Centers its child in the expanded space
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min, // Don't expand vertically
+                      children: [
+                        LevelVisualizer(
+                          rollAngle: angles['roll']!,
+                          pitchAngle: angles['pitch']!,
+                          yawAngle: angles['yaw']!,
+                        ),
+                        Text(
+                          'Place phone standing up on the top edge of the picture frame.',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.getFont('VT323', fontSize: 20),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // Center(
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      LevelVisualizer(
-                        rollAngle: angles['roll']!,
-                        pitchAngle: angles['pitch']!,
-                        yawAngle: angles['yaw']!,
+                      // --- Back Button ---
+                      GestureDetector(
+                        onTap: widget.onGoHome,
+                        child: Image.asset('assets/back.png', width: 60),
                       ),
-                      Text(
-                        'Place phone standing up on the top edge of the picture frame.',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.getFont('VT323', fontSize: 20),
+
+                      SizedBox(width: 25),
+
+                      Visibility(
+                        visible: !_isBottomSheetOpen,
+                        // These properties ensure the button's space is maintained
+                        // even when it's invisible, preventing any layout shift.
+                        maintainState: true,
+                        maintainAnimation: true,
+                        maintainSize: true,
+                        child: GestureDetector(
+                          onTap: () async {
+                            setState(() {
+                              _isBottomSheetOpen = true;
+                            });
+
+                            await showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              // Control the dimming of the background behind the sheet.
+                              barrierColor: Colors.transparent,
+                              builder: (BuildContext context) {
+                                // This Column with MainAxisSize.min is the key to making
+                                // the bottom sheet only as tall as its content.
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                        8,
+                                        16,
+                                        8,
+                                        16,
+                                      ),
+                                      child: AngleDisplay(
+                                        angleStream:
+                                            _angleStreamController.stream,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+
+                            // This code runs after the sheet is dismissed
+                            setState(() {
+                              _isBottomSheetOpen = false;
+                            });
+                          },
+                          child: Image.asset(
+                            'assets/show_more_details.png',
+                            width: 140, // Adjust size as needed
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              // Center(
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // --- Back Button ---
-                    GestureDetector(
-                      onTap: widget.onGoHome,
-                      child: Image.asset('assets/back.png', width: 60),
-                    ),
-
-                    SizedBox(width: 25),
-
-                    Visibility(
-                      visible: !_isBottomSheetOpen,
-                      // These properties ensure the button's space is maintained
-                      // even when it's invisible, preventing any layout shift.
-                      maintainState: true,
-                      maintainAnimation: true,
-                      maintainSize: true,
-                      child: GestureDetector(
-                        onTap: () async {
-                          setState(() {
-                            _isBottomSheetOpen = true;
-                          });
-
-                          await showModalBottomSheet(
-                            context: context,
-                            backgroundColor: Colors.transparent,
-                            // Control the dimming of the background behind the sheet.
-                            barrierColor: Colors.transparent,
-                            builder: (BuildContext context) {
-                              // This Column with MainAxisSize.min is the key to making
-                              // the bottom sheet only as tall as its content.
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                      8,
-                                      16,
-                                      8,
-                                      16,
-                                    ),
-                                    child: AngleDisplay(
-                                      angleStream:
-                                          _angleStreamController.stream,
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-
-                          // This code runs after the sheet is dismissed
-                          setState(() {
-                            _isBottomSheetOpen = false;
-                          });
-                        },
-                        child: Image.asset(
-                          'assets/show_more_details.png',
-                          width: 140, // Adjust size as needed
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              // ),
-            ],
+                // ),
+              ],
+            ),
           ),
         );
       },

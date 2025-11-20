@@ -72,9 +72,18 @@ class _WallPlanarAppState extends State<WallPlanarApp> {
         // primarySwatch: Colors.blue,
         fontFamily: 'Inter',
       ),
-      home: Scaffold(
-        // Use WillPopScope to ensure back button returns to home screen
-        body: WillPopScope(
+      home: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/grid.png"),
+            fit: BoxFit.cover, // Stretch the image to cover the screen
+            colorFilter: ColorFilter.mode(
+              Colors.white.withOpacity(0.7), // Adjust the color and opacity
+              BlendMode.lighten, // Or BlendMode.dstIn
+            ),
+          ),
+        ),
+        child: WillPopScope(
           onWillPop: () async {
             if (!isHome) {
               _goHome();
