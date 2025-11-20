@@ -61,68 +61,14 @@ class LevelVisualizer extends StatelessWidget {
           ),
         ),
 
-        // --- Visualization Container ---
-        Container(
-          width: double.infinity,
-          height: 150,
-          decoration: BoxDecoration(
-            color: Colors.blueGrey.shade900,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.blueGrey.shade700, width: 1),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                blurRadius: 10,
-                offset: const Offset(0, 5),
-              ),
-            ],
+        // --- The Rotating Image (Visualizing the Picture Frame Tilt) ---
+        Transform.rotate(
+          angle: angleInRadians,
+          child: Image.asset(
+            isLevel ? 'assets/level_perfect.png' : 'assets/level.png',
+            width: 720, // Increased width
+            height: 300, // Increased height
           ),
-          child: Center(
-            // --- The Rotating Line (Visualizing the Picture Frame Tilt) ---
-            child: Transform.rotate(
-              angle: angleInRadians,
-              child: Container(
-                width: 280,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: isLevel ? Colors.lightGreen : Colors.white,
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: Colors.black, width: 2),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  'Picture Frame',
-                  style: TextStyle(
-                    color: isLevel ? Colors.black : Colors.black87,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-
-        // --- Numerical Pitch/Roll/Yaw (For secondary info/debugging) ---
-        const SizedBox(height: 20),
-
-        // Roll (X-axis tilt) is now the side-to-side tilt (ignored for leveling)
-        Text(
-          'Roll (X-Axis Tilt): ${rollAngle.toStringAsFixed(2)}° (Ignored for Leveling)',
-          style: const TextStyle(color: Colors.orange, fontSize: 16),
-        ),
-        // Pitch (Y-axis tilt) is the main angle displayed above
-        Text(
-          'Pitch (Y-Axis Tilt): ${pitchAngle.toStringAsFixed(2)}° (Primary Angle)',
-          style: const TextStyle(
-            color: Colors.cyanAccent,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        // Yaw (Z-axis heading) is still the heading
-        Text(
-          'Yaw (Z-Axis Heading): ${yawAngle.toStringAsFixed(2)}°',
-          style: const TextStyle(color: Colors.purpleAccent, fontSize: 14),
         ),
       ],
     );
