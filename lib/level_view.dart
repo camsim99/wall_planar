@@ -19,6 +19,7 @@ class _LevelViewState extends State<LevelView> {
   final _angleStreamController =
       StreamController<Map<String, double>>.broadcast();
   late final StreamSubscription _sensorSubscription;
+  bool _isBottomSheetOpen = false;
 
   @override
   void initState() {
@@ -82,24 +83,55 @@ class _LevelViewState extends State<LevelView> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Colors.blueGrey.shade900,
-                        builder: (BuildContext context) {
-                          return Padding(
-                            padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
-                            child: AngleDisplay(
-                              angleStream: _angleStreamController.stream,
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: Image.asset(
-                      'assets/show_more_details.png',
-                      width: 140, // Adjust size as needed
+                  child: Visibility(
+                    visible: !_isBottomSheetOpen,
+                    // These properties ensure the button's space is maintained
+                    // even when it's invisible, preventing any layout shift.
+                    maintainState: true,
+                    maintainAnimation: true,
+                    maintainSize: true,
+                    child: GestureDetector(
+                      onTap: () async {
+                        setState(() {
+                          _isBottomSheetOpen = true;
+                        });
+
+                        await showModalBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          // Control the dimming of the background behind the sheet.
+                          barrierColor: Colors.transparent,
+                          builder: (BuildContext context) {
+                            // This Column with MainAxisSize.min is the key to making
+                            // the bottom sheet only as tall as its content.
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    8,
+                                    16,
+                                    8,
+                                    16,
+                                  ),
+                                  child: AngleDisplay(
+                                    angleStream: _angleStreamController.stream,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+
+                        // This code runs after the sheet is dismissed
+                        setState(() {
+                          _isBottomSheetOpen = false;
+                        });
+                      },
+                      child: Image.asset(
+                        'assets/show_more_details.png',
+                        width: 140, // Adjust size as needed
+                      ),
                     ),
                   ),
                 ),

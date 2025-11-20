@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AngleDisplay extends StatefulWidget {
   final Stream<Map<String, double>> angleStream;
@@ -13,43 +14,34 @@ class _AngleDisplayState extends State<AngleDisplay> {
   Widget _buildAngleCard({
     required String title,
     required double value,
-    required Color color,
+    required Color accentColor,
+    bool isPrimary = false,
   }) {
-    // Format to 2 decimal places and ensure 0.0 is shown correctly
-    final String formattedValue = value.toStringAsFixed(2);
-
-    // Check if close to 0 (level)
+    final String formattedValue = value.toStringAsFixed(1);
     final bool isLevel = value.abs() < 1.0;
+    final Color displayColor = isLevel ? Colors.lightGreenAccent : accentColor;
 
-    return Card(
-      color: Colors.blueGrey.shade800,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: BorderSide(
-          color: isLevel ? Colors.lightGreenAccent : color.withOpacity(0.5),
-          width: 2,
-        ),
-      ),
+    return Container(
+      // padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(0.0),
         child: Column(
           children: [
             Text(
               title,
-              style: TextStyle(
-                fontSize: 16,
-                color: color,
-                fontWeight: FontWeight.w500,
+              style: GoogleFonts.getFont(
+                'Press Start 2P',
+                fontSize: isPrimary ? 14 : 10,
+                color: displayColor,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             Text(
               '$formattedValue°',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: isLevel ? Colors.lightGreenAccent : Colors.white,
-                fontFamily: 'monospace',
+              style: GoogleFonts.getFont(
+                'VT323',
+                fontSize: isPrimary ? 40 : 28,
+                color: Colors.white,
               ),
             ),
           ],
@@ -65,31 +57,51 @@ class _AngleDisplayState extends State<AngleDisplay> {
       builder: (context, snapshot) {
         final angles = snapshot.data ?? {'roll': 0.0, 'pitch': 0.0, 'yaw': 0.0};
 
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Roll (X-axis) - Side to side tilt
-            _buildAngleCard(
-              title: 'Roll (X-Axis)',
-              value: angles['roll']!,
-              color: Colors.orange,
+        return Container(
+          // Semi-transparent background to ensure readability over the starfield
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.9),
+            // border: const Border(
+            //   top: BorderSide(color: Colors.white24, width: 2),
+            // ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 16.0,
+              horizontal: 8.0,
             ),
-            const SizedBox(height: 8),
-            // Pitch (Y-axis) - Forward/backward tilt
-            _buildAngleCard(
-              title: 'Pitch (Y-Axis)',
-              value: angles['pitch']!,
-              color: Colors.cyanAccent,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: _buildAngleCard(
+                    title: 'Roll',
+                    value: angles['roll']!,
+                    accentColor: Colors.redAccent,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Flexible(
+                  flex: 2, // Give the primary angle a bit more space
+                  child: _buildAngleCard(
+                    title: 'Pitch',
+                    value: angles['pitch']!,
+                    accentColor: Colors.blueAccent,
+                    isPrimary: true,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: _buildAngleCard(
+                    title: 'Yaw',
+                    value: angles['yaw']!,
+                    accentColor: Colors.redAccent.withOpacity(0.7),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 8),
-            // Yaw (Z-axis) - Compass heading (less critical for leveling)
-            _buildAngleCard(
-              title: 'Yaw (Z-Axis)',
-              value: angles['yaw']!,
-              color: Colors.purpleAccent,
-            ),
-            const SizedBox(height: 16), // Add some padding at the bottom
-          ],
+          ),
         );
       },
     );
